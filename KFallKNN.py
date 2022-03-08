@@ -6,6 +6,7 @@ import pandas as pd
 from matplotlib.colors import ListedColormap
 import seaborn as sns
 cmap = ListedColormap(["#FF0000", "#00FF00", "#0000FF"])
+#accuracy scratch
 def accuracy(y_true,y_pred):
     accuracy = np.sum(y_true == y_pred) / len(y_true)
     return accuracy
@@ -25,12 +26,12 @@ encoder = preprocessing.LabelEncoder()
 y = encoder.fit_transform(y)
 print(y)
 labels = encoder.classes_
-s_f = 0.8
-n_train = math.floor(s_f * X.shape[0])
+s_f = 0.8 # declaring training size as 0.8 which means 80% 
+n_train = math.floor(s_f * X.shape[0])   
 n_test = math.ceil((1-s_f) * X.shape[0])
-X_train = X[:n_train]
+X_train = X[:n_train]# split the training 
 y_train = y[:n_train]
-X_test = X[n_train:]
+X_test = X[n_train:]# split the testing
 y_test = y[n_train:]
 print("Total Number of rows in train:",X_train.shape[0])
 print("Total Number of rows in test:",X_test.shape[0])
@@ -48,11 +49,12 @@ print("\nX_test")
 print(X_test)
 print("\ny_test")
 print(y_test)
+#this KNN is imported from KNN.py file
 clf = kn.KNN(K=3)
 clf.fit(X_train,y_train)
 predictions = clf.predict(X_test)
 print("KNN classfication accurarcy",accuracy(y_test,predictions))
-
+#confusion matrix scratch
 def confusion_matrix(actual, predicted):
     classes = np.unique(np.concatenate((actual,predicted)))
     confusion_mtx = np.empty((len(classes),len(classes)),dtype=np.int)
